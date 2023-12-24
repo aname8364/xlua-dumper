@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CheatTable CheatEngineTableVersion="45">
+  <CheatEntries/>
+  <UserdefinedSymbols/>
+  <LuaScript>local dumpedNames = {}
+
+local function dumpBuffer()
+   local name = readString(R9, 50)
+
+   if dumpedNames[name] then
+      return
+   end
+
+   local lua  = readString(RDX, R8)
+   local temp = io.open(TrainerOrigin.."Game\\"..name..".lua", "wb")
+   temp:write(lua)
+   temp:close()
+   dumpedNames[name] = true
+end
+
+debug_setBreakpoint("xlua.xluaL_loadbuffer", dumpBuffer)
+
+</LuaScript>
+</CheatTable>
